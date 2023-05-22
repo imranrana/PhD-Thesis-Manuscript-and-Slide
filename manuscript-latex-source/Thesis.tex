@@ -1,0 +1,200 @@
+%!BIB TS-program = biber
+\documentclass{mimosis}
+\usepackage{blindtext} %added for box
+\usepackage[most]{tcolorbox} %added for box
+\usepackage{metalogo}
+\usepackage{rotating}
+\usepackage{lscape}
+\usepackage{enumerate}
+\usepackage{minitoc}
+\usepackage{afterpage}
+\usepackage[vlined,ruled]{algorithm2e}
+\usepackage{multirow}
+\newtheorem{definition}{Definition}
+\newtheorem{researchquestion}{Research Question}
+\newtheorem{keypoints}{Key Points}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{tablefootnote}
+\usepackage{placeins}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\mtcsetdepth{minitoc}{2}
+\mtcsettitle{minitoc}{Chapter Contents}
+\newcommand{\stoptocwriting}{%
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{-5}}}
+\newcommand{\resumetocwriting}{%
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{\arabic{tocdepth}}}}
+%%%%%%%%%%FOR FIGS%%%%%%%%%%%%%
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.7}
+
+%%%%%%%%%%FOR FIGS%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some of my favourite personal adjustments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% These are the adjustments that I consider necessary for typesetting
+% a nice thesis. However, they are *not* included in the template, as
+% I do not want to force you to use them.
+
+% This ensures that I am able to typeset bold font in table while still aligning the numbers
+% correctly.
+\usepackage{etoolbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlinks & bookmarks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[%
+colorlinks = true,
+citecolor  = RoyalBlue,
+linkcolor  = RoyalBlue,
+urlcolor   = RoyalBlue,
+unicode,
+]{hyperref}
+
+\usepackage{bookmark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% I like the bibliography to be extremely plain, showing only a numeric
+% identifier and citing everything in simple brackets. The first names,
+% if present, will be initialized. DOIs and URLs will be preserved.
+
+\usepackage[%
+autocite     = plain,
+backend      = biber,
+doi          = true,
+url          = false,
+giveninits   = true,
+hyperref     = true,
+maxbibnames  = 99,
+maxcitenames = 99,
+sortcites    = true,
+style        = numeric,
+]{biblatex}
+
+\input{bibliography-mimosis}
+\addbibresource{Thesis.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setmainfont{Libre Baskerville}
+%\setsansfont[Scale=MatchLowercase]{IBM Plex Sans}
+%\setmonofont[Scale=MatchLowercase]{IBM Plex Mono}
+\ifxetexorluatex
+\usepackage{unicode-math}
+\setmainfont{EB Garamond}
+\setmathfont{Garamond Math}
+\setmonofont[Scale=MatchLowercase]{Source Code Pro}
+\else
+\usepackage[lf]{ebgaramond}
+\usepackage[oldstyle,scale=0.7]{sourcecodepro}
+\singlespacing
+\fi
+
+%%%%Copy Acronyms fro a separtae file%%%%%%%%%
+%\newacronym[description={Convolutional Neural Network}]{CNN}{CNN}{Convolutional Neural Network}
+%\newacronym[description={Artificial Intelligence}]{AI}{AI}{Artificial Intelligence}
+%\newacronym[description={Erythema Migrans}]{EM}{EM}{Erythema Migrans}
+\input{Sources/Acronyms.tex}
+%%%%Copy Acronyms fro a separtae file%%%%%%%%%
+
+
+%\newglossaryentry{LaTeX}{%
+%	name        = {\LaTeX},
+%	description = {A document preparation system},
+%	sort        = {LaTeX},
+%}
+%
+%\newglossaryentry{Real numbers}{%
+%	name        = {$\real$},
+%	description = {The set of real numbers},
+%	sort        = {Real numbers},
+%}
+
+\makeindex
+\makeglossaries
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ordinals
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\@ifundefined{st}{%
+	\newcommand{\st}{\textsuperscript{\textup{st}}\xspace}
+}{}
+\@ifundefined{rd}{%
+	\newcommand{\rd}{\textsuperscript{\textup{rd}}\xspace}
+}{}
+\@ifundefined{nd}{%
+	\newcommand{\nd}{\textsuperscript{\textup{nd}}\xspace}
+}{}
+\makeatother
+
+\renewcommand{\th}{\textsuperscript{\textup{th}}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Incipit
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	\raggedbottom
+	\sloppy
+	\frontmatter
+	\include{Sources/Title_UCA.tex}
+	\include{Sources/Acknowledgments.tex}
+	\include{Sources/Abstract.tex}
+	\include{Sources/Resume.tex}
+	\dominitoc
+	\tableofcontents
+	
+	\mainmatter
+	
+	\include{Sources/Introduction.tex}
+	\include{Sources/Background.tex}
+	\include{Sources/Pretraining.tex}
+	\include{Sources/Elicitation.tex}
+	\include{Sources/InProgress.tex}
+	\include{Sources/Conclusion.tex}
+	% This ensures that the subsequent sections are being included as root
+	% items in the bookmark structure of your PDF reader.
+	\bookmarksetup{startatroot}
+	\appendix
+	\input{Sources/Appendices2}
+	\input{Sources/Appendices}
+	\input{Sources/Appendices4}
+	\input{Sources/Appendices5}
+	
+	\backmatter
+	
+	\begingroup
+		\let\clearpage\relax
+		\glsaddall
+		\printglossary[type=\acronymtype]
+		\newpage
+	\endgroup
+	\listoffigures
+	\newpage
+	\listoftables
+	\newpage
+	\listofalgorithms
+	\addcontentsline{toc}{chapter}{List of Algorithms}
+	\newpage
+	\printbibliography
+	% \printindex
+	
+	
+	
+\end{document}

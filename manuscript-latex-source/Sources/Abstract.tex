@@ -1,0 +1,15 @@
+\begin{center}
+  \textsc{Abstract}
+\end{center}
+%
+\noindent
+%
+Recent advancement in deep learning techniques has eased the creation of artificial intelligence (AI) solutions to aid in skin disorder diagnosis. Studies showed that incorporating data from multiple modalities in the analysis process significantly improves the AI based model’s performance compared to a single modality based analysis for many medical diagnosis tasks. Although deep learning based systems compete on par with expert dermatologists for diagnosing skin cancer, their application is limited in diseases like Lyme disease, where it is difficult to collect training data.
+
+In this thesis, we particularly focused on AI assisted Lyme disease analysis because it requires both patient data and lesion images for a proper diagnosis, but there is no available dataset comprising both of these modalities. Self-supervised pre-training is effective to address the data scarcity problem of lesion images when a large number of in-domain images are available. But for some diseases, it's difficult to collect a lot of in-domain images. To tackle this problem we proposed a customized transfer learning approach to improve ImageNet pre-trained convolutional neural network’s performance by utilizing additional pre-training with an out-of-domain dataset. To deal with the lack of training data for patient data modality, we proposed an expert opinion elicitation approach to create a model that calculates disease probability from patient data with intuitive model validation based on decision tree and formal concept analysis. The proposed questionnaire based elicitation approach is less demanding for the experts.  We also proposed an approach for combining disease probability scores from multiple modalities by ensuring veto power for a modality, based on expert choice. 
+
+As part of the thesis, we prepared a dataset of Lyme disease related skin lesion images with labeling from expert dermatologists. We also created another skin lesion hair mask annotation dataset for dealing with lesion hair artifacts in an efficient manner. The proposed techniques in this thesis were applied to create a mobile application for assisting with early Lyme disease diagnosis but they will be useful for other similar diseases where there is a problem of data scarcity.
+
+\vspace{0.3cm}
+\noindent \textsc{Keywords}: Artificial intelligence; Data scarcity; Deep learning; Multimodality; Lyme disease; Erythema migrans
+

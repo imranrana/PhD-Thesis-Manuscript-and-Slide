@@ -1,0 +1,49 @@
+\chapter{Appendices for Chapter 2}
+\section{Activation Functions}
+Table \ref{tab:activations} lists some of the most commonly used activation functions in deep learning.
+\begin{table}[htb!]
+	\centering
+	\caption{Activation functions.}
+	\label{tab:activations}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{@{}ll@{}}
+			\toprule
+			\textbf{Activation function} & \textbf{Equation} \\ \midrule
+			Identity &    $f(x)=x$  \\ \cmidrule(){1-2}
+			Sigmoid \cite{Narayan1997} & $f(x) = \frac{1}{1+e^{-x}}$ \\ \cmidrule(){1-2}
+			Swish \cite{SwishRef} & $f(x) = \frac{x}{1+e^{-x}}$ \\ \cmidrule(){1-2}
+			\begin{tabular}[c]{@{}l@{}}Hyperbolic tangent\\ (tanh) \cite{maas2013rectifier}\end{tabular} & $f(x) = \frac{e^x-e^{-x}}{e^x+e^{-x}}$ \\ \cmidrule(){1-2}
+			\begin{tabular}[c]{@{}l@{}}Rectified Linear Unit\\ (ReLU) \cite{maas2013rectifier}\end{tabular} &    $f(x)=max(0,x)$    \\\cmidrule(){1-2}
+			\begin{tabular}[c]{@{}l@{}}Gaussian Error Linear Unit\\ (GELU) \cite{Hendrycks2016}\end{tabular} & \begin{tabular}[c]{@{}l@{}}$f(x)=x\Phi(x)$ \\where $\Phi(x)$ is the Gaussian cumulative distribution function.\end{tabular} \\ \cmidrule(){1-2}
+			Softmax \cite{Goodfellow-et-al-2016} & \begin{tabular}[c]{@{}l@{}}Normalizes an input vector $z$ of $n$ real numbers into a probability distribution\\ $f(z)_i=\frac{e^{z_i}}{\sum_{j=1}^n e^{z_j}} \text { for } i=1, \ldots, n \text { and } z=\left(z_1, \ldots, z_n\right) \in \mathbb{R}^n$ \end{tabular}\\
+			\bottomrule
+		\end{tabular}%
+	}
+\end{table}
+
+\section{Gradient Descent and Adam Optimizer}\label{app:optimizer}
+Gradient descent also known as batch gradient descent is an optimization algorithm for locating a differentiable objective function's local minimum. It iteratively reduces the value of the objective function by adapting model parameters. The iterative parameter update equation of gradient descent is shown in Equation \ref{eq:drad_des}.
+\begin{equation}\label{eq:drad_des}
+	\theta=\theta-\eta \cdot \nabla_\theta L(\theta)
+\end{equation}
+where $\theta$ represents model parameters, $L(\theta)$ is the objective function, $\eta$ is the learning rate, and $\nabla_\theta L(\theta)$ is the gradient of the objective function w.r.t the parameters. 
+
+Adaptive moment estimation (Adam) optimizer \cite{Kingma2015} calculates adaptive learning rate for each individual parameter and uses exponentially decaying average of past gradients ($m_t$) and squared gradients($v_t$) as shown in the following equation:
+\begin{equation}
+	\begin{aligned}
+		m_t & =\beta_1 m_{t-1}+\left(1-\beta_1\right) g_t \\
+		v_t & =\beta_2 v_{t-1}+\left(1-\beta_2\right) g_t^2
+	\end{aligned}
+\end{equation}
+where $g_t=\nabla_\theta L_t\left(\theta_{t-1}\right)$ is the gradient of the objective function at timestep $t$, and  $\beta 1, \beta 2 \in[0,1)$ are hyper-parameters to control the exponential decay rates of moving averages. $m_t$ and $v_t$ are bias corrected as follows:
+\begin{equation}
+	\begin{aligned}
+		\hat{m}_t & =\frac{m_t}{1-\beta_1^t} \\
+		\hat{v}_t & =\frac{v_t}{1-\beta_2^t}
+	\end{aligned}
+\end{equation}
+The parameter update rule of Adam optimizer is shown in Equation \ref{eq:adap_update}.
+\begin{equation}\label{eq:adap_update}
+	\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{\hat{v}_t}+\epsilon} \hat{m}_t
+\end{equation}
+where $\epsilon$ is a small number for preventing division by zero. The author proposed default values for $\beta_1, \beta_2, \,\text{and}\, \epsilon$ are $0.9, 0.999 \;\text{and}\, 10^{-8}$ respectively.

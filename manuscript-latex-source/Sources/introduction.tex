@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}\label{chap:introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+	\begin{minipage}{0.8\textwidth}
+		\begin{small}
+			This chapter sets the thesis motivation, summarizes our research problem and main contributions, and also contains the thesis organization.
+		\end{small}
+	\end{minipage}
+	\vspace{0.5cm}
+\end{center}
+
+\minitoc
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Context}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Diagnosing skin disorders requires a careful inspection from dermatologists or infectiologists but their availability, especially in rural areas is scarce \cite{Feng2018}. As a result, the diagnosis is generally carried out by non-specialists, and their diagnostic accuracy is in the range of twenty-four to seventy percent \cite{Seth2017,Tran2005}. The wrong diagnosis can result in improper or delayed treatment which can be harmful to the patient. Recent advancements in Artificial intelligence (AI) especially deep learning techniques have found applications in many medical domains including medical image analysis tasks \cite{BENHAMIDA2021104730, Czepita2021, liu2022explainable, visapp23barra}. It has eased the creation of AI solutions to aid in skin disorder diagnosis. AI powered diagnostic tools can help with the scarcity of expert dermatologists.
+
+Many works have been done utilizing deep learning techniques specifically convolutional neural networks (CNNs) for diagnosing cancerous and other common skin lesions from dermoscopic images. Dermoscopic images have unique lighting and low level of noise because they are captured using a dermatoscope device having a lighting system and a high-quality magnifying lens \cite{sun2016benchmark}. Dermoscopic images require dermatoscopes from dermatology clinics so other works focused on diagnosing skin diseases using deep learning from clinical skin lesion images acquired mostly using mobile phones and digital cameras \cite{sun2016benchmark}. 
+
+Several studies have shown that deep learning-based systems’ disease diagnosis capability from clinical and dermoscopic images is on par with experienced dermatologists \cite{Codella2019, Brinker2019, Maron2019, Tschandl2018, Esteva2017, Han2018}. Considering patient data with skin lesion images can boost the performance of AI model for skin disease diagnosis and for some diseases like Lyme disease, it is crucial to consider both modalities for a proper diagnosis. But the scarcity of training data is a big challenge for creating robust AI models. In this thesis, we tried to tackle the data scarcity issue of multimodal skin disorder diagnosis by addressing the issues of a limited number of clinical skin lesion images, unavailability of patient data, and hair artifacts on dermoscopic lesion images.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Research Problems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+For image classification problems with limited labeled data, pre-training the model with a large number of unlabeled domain specific images can significantly improve the model performance \cite{9710396, He2020.04.13.20063941, 9010639, 10.1007/978-3-030-59710-8_39, https://doi.org/10.48550/arxiv.2211.08559, https://doi.org/10.48550/arxiv.2010.05352}. Often practitioners work with clinical skin lesion images and it is difficult to gather a large number of unlabeled images from the same domain for rare diseases. Many datasets of dermoscopic images are easily accessible however, their image modality is significantly different from clinical skin lesion images. Our first research concern is about the utilization of dermoscopic images for improving the performance of Clinical image classification. 
+
+Without taking into account the additional context from patient data, a correct diagnosis solely on skin lesions is ineffective for some conditions, such as Lyme disease. However, it is time-consuming and costly to collect training data for patient data modality let alone creating a dataset comprising multiple modalities. So, our second research concern is how to utilize patient data to assist deep learning based skin lesion image classifier in the absence of training data.
+
+The effectiveness of computer-assisted lesion analysis algorithms is affected by the occlusion of skin lesions in dermoscopic images caused by hair artifacts. Our third research concern is about efficiently handling hair artifacts in dermoscopic images.
+
+In this section, we have briefly stated our research concerns. These issues are described in detail in Section \ref{sec:research-questions} in context of related works.
+
+%The following sections provide required theoretical background, specifies the research questions based on literature review, presents our main contributions and also the the thesis organization.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Contributions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this thesis, we have made the following contributions addressing the stated research problems:
+
+\begin{itemize}
+	
+	\item A strategy to improve transfer learning based clinical skin lesion image classifier's performance with additional pre-training using dermoscopic images.
+	
+	\item A flexible questionnaire based expert opinion elicitation method to assist skin lesion image classifier with patient data in the absence of training data.
+	
+	\item An approach for combining independent disease probability scores from multiple modalities by ensuring veto power for a modality based on expert choice.
+	
+	\item A dataset of Lyme disease related skin lesion images with labeling from expert dermatologists.
+	
+	\item A fine-grained skin lesion hair mask annotation dataset for dealing with lesion hair artifacts in an efficient manner.
+	
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Thesis Organization}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The thesis is organized into six chapters:
+\begin{itemize}
+	
+	\item Chapter \ref{chap:introduction}  (introduction) sets the thesis motivation, summarizes the research problems and our main contributions, and also contains the thesis organization.
+	
+	\item Chapter \ref{chap:background} provides the required theoretical background and literature review, and states the research questions in context of related studies.
+	
+	\item Chapter \ref{chap:Pretraining} presents our pre-training strategy for improving clinical skin lesion image classification performance of ImageNet pre-trained convolutional neural networks by utilizing additional pre-training with dermoscopic images.
+	
+	\item Chapter \ref{chap:Elicitation} presents the questionnaire based expert opinion elicitation method for calculating disease probability from patient data and an approach for combining independent probability estimates from multiple modalities. 
+	
+	\item Chapter \ref{chap:inprogress} presents our ongoing works on efficiently dealing with dermoscopic skin lesion hair artifact, custom architecture for Lyme disease image classifier, and an application utilizing our research findings.
+	
+	\item Chapter \ref{chap:conclusions} (conclusions) presents a summary of the key findings of this thesis and possible future research directions. 
+	
+\end{itemize}

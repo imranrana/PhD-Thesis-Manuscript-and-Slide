@@ -1,0 +1,74 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusions}\label{chap:conclusions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+	\begin{minipage}{0.8\textwidth}
+		\begin{small}
+			This chapter presents a short summary of the key findings of this thesis, possible future research directions, and publications resulting from the thesis. 
+		\end{small}
+	\end{minipage}
+	\vspace{0.5cm}
+\end{center}
+
+\minitoc
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{General Conclusion and Research Findings}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this thesis, we tried to tackle the data scarcity problem of artificial intelligence based multimodal skin lesion analysis. We addressed the challenges of a small clinical skin lesion image dataset and also the lack of training data for patient modality. 
+
+First, to deal with image data scarcity of clinical skin lesion images we proposed a pre-training strategy that involves fine-tuning some layers from the end of an ImageNet pre-trained convolutional neural network (CNN) architecture using a dermoscopic dataset before training the model on a clinical skin lesion dataset. Experimental results using a novel Lyme disease dataset built as part of the thesis showed the effectiveness of the proposed approach for improving CNN performance. In order to evaluate the efficacy of CNNs for Lyme disease diagnosis using erythema migrans (EM) pictures, we used the proposed strategy to compare well-known CNNs and the results suggest that even lightweight models, such as EffiicentNetB0, performed admirably, pointing to the potential use of CNNs in Lyme disease pre-scanner mobile applications that can assist people with a preliminary assessment.
+
+Second, to address the scarcity problem of patient data we have proposed a questionnaire-oriented expert opinion elicitation approach that can provide disease probability in the absence of training data. As it is difficult and time consuming for doctors to provide probability estimates for all possible cases or distribution parameters we collected relative weight assignments to different answers to the questions and converted the doctor’s evaluations to probabilities utilizing Gaussian mixture model based density estimation. We also proposed the use of formal concept analysis and decision trees for easy model validation.  The proposed approach is easy for doctors to follow. We also proposed an approach for combining the probability estimates from CNN image classifier and opinion elicited disease probability by considering the expert’s choice. The proposed techniques proved effective when applied to a Lyme disease diagnosis scenario.
+
+Third, to address the problem of skin hair artifact on dermoscopic images we have created the largest publicly available skin lesion hair mask annotation dataset by carefully annotating five hundred dermoscopic images. The dataset can be utilized for training accurate segmentation algorithms and also to enhance the hair augmentation process. Currently, we are working on hair augmentation utilizing the prepared dataset and also on a lightweight architecture for EM image classification.
+
+The techniques proposed in this thesis were applied to a mobile application for assisting with the early diagnosis of Lyme disease. Initial trials with the prototype showed promising results for real-life application and we believe that these techniques will be useful for addressing data scarcity issues in similar diseases. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Limitations and Future Research Directions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We have used supervised learning for our proposed pre-training strategy. Using self-supervised learning for the pre-training can be an interesting study. The search for the number of layers to unfreeze from the pre-trained model takes time as it requires training different versions of the model on the target dataset. Although, it takes does not take very long as most of the layers are frozen the search time can be improved by utilizing techniques used to reduce candidate architecture evaluation time from neural architecture search (NAS) literature\cite{NASefficiency}. Also, the pre-training approach can be tested with clinical skin lesion image pre-training in place of dermoscopic images. 
+
+Our work on combining probability estimates from CNN and the elicited model needs to be validated using real case scenarios. We plan to collect real scenarios of Lyme disease cases by deploying the mobile application. After collecting sufficient data the performance of the elicited model and approach of combining probabilities can be compared with a multimodal model jointly trained using multimodal training data. It would be interesting to see if calibrating CNN \cite{CalibrationRef} to make its predicted confidence score more accurate representative of the true probability estimate provides better performance or not. 
+
+Our prepared skin lesion hair mask dataset can be utilized for training generative models to automate the task of hair mask generation process of realistic hair augmentation techniques. Another interesting study would be to see if training time hair augmentation can be an effective replacement for test time hair removal or not.
+
+The custom architecture for EM image classification can be optimized using NAS with the building blocks described in Section \ref{sec:in_progress_archi}. My previously proposed particle swarm optimization with selective search technique \footfullcite{ImranHossain2019} that retains the intermediate best solution during the search process can be an interesting choice for performing the NAS. Also, utilizing our proposed pre-training strategy may improve the model's performance. The optimized model can be a good option for deploying in a mobile application.
+
+In this study, we have considered the case of differential diagnosis for Lyme disease i.e. differentiating between EM and similar skin lesions. As the used CNN architectures are not distance aware by default they classify out-of-distribution data with high confidence. For real-life applications, there will be trust issues among users if the model classifies unrelated images as EM. So, out-of-distribution image detection \cite{Hsu2020OOD, NEURIPS2020_543e8374, Yang2021OOD} needs to be studied and utilized for improving the application.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Statement}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+All the research data associated with this thesis are available on the DAPPEM website\footnote{\url{https://dappem.limos.fr} (visited on 02/20/2023).}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Research Publications}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The following publications resulted from the findings of the thesis:
+
+\subsection*{Research Article}
+\begin{itemize}
+	\item \fullcite{Hossain2022}
+	\item \fullcite{Hossain2022Elicitation} (submitted)
+	\item \fullcite{Hossain2023} (accepted, Data in Brief journal)
+\end{itemize}
+
+\subsection*{Research Demonstration}
+\begin{itemize}
+	\item \fullcite{EMSCacnEGC}.  \textsc{url}: \url{https://editions-rnti.fr/?inprocid=1002869}
+	\item \fullcite{EMSCacnECCV}. Project Demo. \textsc{url}: \url{https://eccv2022.ecva.net/program/demo-list/}
+\end{itemize}
+
+\subsection*{Doctoral Consortium}
+\begin{itemize}
+	\item \fullcite{Hossain2022IJCAI}.
+\end{itemize}
+
+\subsection*{Research Talk}
+\begin{itemize}
+	\item \fullcite{ResearchTalk1}.  \textsc{url}: \url{https://www.gdr-isis.fr/index.php/reunion/485/}
+	
+	\item \fullcite{ResearchTalk2}.  \textsc{url}: \url{https://www.gdr-isis.fr/index.php/reunion/468/}
+\end{itemize}
